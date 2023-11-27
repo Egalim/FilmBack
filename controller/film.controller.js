@@ -1,4 +1,4 @@
-const db = require('../db')
+import {db} from '../db.js'
 
 class FilmController {
     async createFilm(req, res) {
@@ -12,9 +12,9 @@ class FilmController {
     }
     async getOneFilm(req, res) {
         const film_id = req.params.id;
-        const film = await db.query('SELECT * FROM public."Film" where film_id = $1', [film_id])
+        const film = await db.query(`SELECT * FROM public."Film" where film_id = ${film_id}`)
         res.json(film.rows[0])
     }
 }
 
-module.exports = new FilmController()
+export const filmController = new FilmController()
